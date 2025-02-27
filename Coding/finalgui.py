@@ -11,6 +11,7 @@ import threading
 import time
 from security_logs import get_antivirus_status, get_last_scan_time
 import subprocess
+from pdf_generator import generate_pdf_report
 
 # Create main application window
 root = tb.Window(themename="darkly")
@@ -69,6 +70,13 @@ def antivirus_section():
     scan_label = ttk.Label(main_content, text=scan_time, font=("Arial", 12))
     scan_label.pack(pady=5)
 
+def export_pdf():
+    generate_pdf_report()
+    print("PDF Exported Successfully!")
+
+# Add Export Button
+export_btn = tb.Button(sidebar, text="Export Report to PDF", bootstyle="success", command=export_pdf)
+export_btn.pack(fill=tk.X, pady=5)
 
 
 def update_report(section="Home"):
